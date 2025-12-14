@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🇹🇷 مغامرة التركية للأطفال - ParadiseTurk</title>
-    <!-- Load Tailwind CSS via CDN -->
+    <!-- تحميل Tailwind CSS عبر CDN لتصميم حديث ومستجيب -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Lucide Icons as SVG for simplicity -->
+    <!-- تحميل Lucide Icons كـ SVG -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Custom CSS for Card Flip Effect */
+        /* أنماط مخصصة لتأثير قلب البطاقة في وضع التعلم */
         .perspective-1000 {
             perspective: 1000px;
         }
@@ -19,14 +19,8 @@
         .backface-hidden {
             backface-visibility: hidden;
         }
-        /* Custom Colors for Categories */
-        .bg-brown-400 { background-color: #a16207; }
-        .bg-brown-400:hover { background-color: #b45309; }
-        .bg-fuchsia-500 { background-color: #d946ef; }
-        .bg-fuchsia-500:hover { background-color: #c026d3; }
-        .bg-lime-500 { background-color: #84cc16; }
-        .bg-lime-500:hover { background-color: #65a30d; }
-        /* Animation Utility */
+        
+        /* تأثيرات الحركة */
         @keyframes bounce-in {
             0% { transform: scale(0.5); opacity: 0; }
             80% { transform: scale(1.1); opacity: 1; }
@@ -50,15 +44,15 @@
 <div id="app" class="min-h-screen bg-gradient-to-br from-cyan-100 to-blue-200 font-sans p-4 select-none">
     <div class="max-w-6xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden min-h-[700px] flex flex-col relative border-4 border-white">
         
-        <!-- Header will be inserted here by JS -->
+        <!-- منطقة الرأس (Header) -->
         <div id="header-area"></div>
 
-        <!-- Content Area -->
+        <!-- منطقة المحتوى الرئيسية -->
         <div id="content-area" class="flex-1 p-6 relative">
-            <!-- Dynamic content inserted here by JS -->
+            <!-- سيتم إدراج المحتوى الديناميكي هنا بواسطة JavaScript -->
         </div>
 
-        <!-- Branding -->
+        <!-- التذييل (Branding) -->
         <div class="p-2 text-center text-xs text-gray-500 bg-white/70">
             Powered by ParadiseTurk
         </div>
@@ -66,7 +60,8 @@
 </div>
 
 <script>
-    // --- البيانات ---
+    // --- البيانات (Data) ---
+    // قائمة الفئات والكلمات المخصصة للعبة (العدد الكلي: 18 فئة)
     const categories = [
         {
             id: 'animals',
@@ -409,41 +404,119 @@
                 { id: 179, tr: 'Uzun', ar: 'طويل', emoji: '⬆️' },
                 { id: 180, tr: 'Kısa', ar: 'قصير', emoji: '⬇️' },
             ]
+        },
+        {
+            id: 'time',
+            title: 'الوقت',
+            titleTr: 'Zaman',
+            color: 'bg-indigo-700',
+            icon: '⏰',
+            words: [
+                { id: 181, tr: 'Saat', ar: 'ساعة', emoji: '⏰' },
+                { id: 182, tr: 'Dakika', ar: 'دقيقة', emoji: '⏱️' },
+                { id: 183, tr: 'Saniye', ar: 'ثانية', emoji: '⏳' },
+                { id: 184, tr: 'Gün', ar: 'يوم', emoji: '📅' },
+                { id: 185, tr: 'Hafta', ar: 'أسبوع', emoji: '🗓️' },
+                { id: 186, tr: 'Ay', ar: 'شهر', emoji: '🌙' },
+                { id: 187, tr: 'Yıl', ar: 'سنة', emoji: '🎉' },
+                { id: 188, tr: 'Şimdi', ar: 'الآن', emoji: '➡️' },
+                { id: 189, tr: 'Sonra', ar: 'لاحقاً', emoji: '🔜' },
+                { id: 190, tr: 'Önce', ar: 'سابقاً', emoji: '🔙' },
+            ]
+        },
+        {
+            id: 'feelings',
+            title: 'المشاعر',
+            titleTr: 'Duygular',
+            color: 'bg-violet-400',
+            icon: '😊',
+            words: [
+                { id: 191, tr: 'Mutluluk', ar: 'سعادة', emoji: '😊' },
+                { id: 192, tr: 'Hüzün', ar: 'حزن', emoji: '😔' },
+                { id: 193, tr: 'Korku', ar: 'خوف', emoji: '😨' },
+                { id: 194, tr: 'Kızgınlık', ar: 'غضب', emoji: '😠' },
+                { id: 195, tr: 'Şaşkınlık', ar: 'دهشة', emoji: '😮' },
+                { id: 196, tr: 'Aşk', ar: 'حب', emoji: '❤️' },
+                { id: 197, tr: 'Utangaçlık', ar: 'خجل', emoji: ' blushing_face' },
+                { id: 198, tr: 'Yorgunluk', ar: 'تعب', emoji: '😴' },
+                { id: 199, tr: 'Merak', ar: 'فضول', emoji: '🤔' },
+                { id: 200, tr: 'Neşe', ar: 'بهجة', emoji: '🥳' },
+            ]
+        },
+        {
+            id: 'directions',
+            title: 'الاتجاهات',
+            titleTr: 'Yönler',
+            color: 'bg-amber-400',
+            icon: '🧭',
+            words: [
+                { id: 201, tr: 'Kuzey', ar: 'شمال', emoji: '⬆️' },
+                { id: 202, tr: 'Güney', ar: 'جنوب', emoji: '⬇️' },
+                { id: 203, tr: 'Doğu', ar: 'شرق', emoji: '➡️' },
+                { id: 204, tr: 'Batı', ar: 'غرب', emoji: '⬅️' },
+                { id: 205, tr: 'Sağ', ar: 'يمين', emoji: '👉' },
+                { id: 206, tr: 'Sol', ar: 'يسار', emoji: '👈' },
+                { id: 207, tr: 'İleri', ar: 'للأمام', emoji: '👆' },
+                { id: 208, tr: 'Geri', ar: 'للخلف', emoji: '👇' },
+                { id: 209, tr: 'Yukarı', ar: 'أعلى', emoji: '⏫' },
+                { id: 210, tr: 'Aşağı', ar: 'أسفل', emoji: '⏬' },
+            ]
+        },
+        {
+            id: 'numbers_big',
+            title: 'الأرقام الكبيرة',
+            titleTr: 'Büyük Sayılar',
+            color: 'bg-gray-500',
+            icon: '💯',
+            words: [
+                { id: 211, tr: 'Yirmi', ar: 'عشرون', emoji: '2️⃣0️⃣' },
+                { id: 212, tr: 'Otuz', ar: 'ثلاثون', emoji: '3️⃣0️⃣' },
+                { id: 213, tr: 'Kırk', ar: 'أربعون', emoji: '4️⃣0️⃣' },
+                { id: 214, tr: 'Elli', ar: 'خمسون', emoji: '5️⃣0️⃣' },
+                { id: 215, tr: 'Yüz', ar: 'مائة', emoji: '💯' },
+                { id: 216, tr: 'İki Yüz', ar: 'مائتان', emoji: '2️⃣0️⃣0️⃣' },
+                { id: 217, tr: 'Beş Yüz', ar: 'خمسمائة', emoji: '5️⃣0️⃣0️⃣' },
+                { id: 218, tr: 'Bin', ar: 'ألف', emoji: '1️⃣0️⃣0️⃣0️⃣' },
+                { id: 219, tr: 'On Bin', ar: 'عشرة آلاف', emoji: '1️⃣0️⃣🫵' }, 
+                { id: 220, tr: 'Yüz Bin', ar: 'مائة ألف', emoji: '1️⃣0️⃣0️⃣🫵' },
+            ]
         }
     ];
 
     // --- حالة التطبيق (State) ---
+    // يمثل هذا المتغير حالة اللعبة الحالية
     let state = {
         view: 'home', // home, category-select, learn, quiz, memory
-        activeCat: null, // Used in category-select to choose mode
-        selectedCategory: null,
-        score: 0,
-        // Learn/Quiz specifics
-        currentIndex: 0,
-        isFlipped: false,
-        quizOptions: [],
+        activeCat: null, // الفئة النشطة مؤقتاً لاختيار وضع اللعب
+        selectedCategory: null, // الفئة المختارة للعب
+        score: 0, // النقاط الإجمالية
+        // وضع التعلم/الاختبار
+        currentIndex: 0, // مؤشر الكلمة الحالية
+        isFlipped: false, // حالة قلب البطاقة في وضع التعلم
+        quizOptions: [], // خيارات الاختبار
         quizFeedback: null, // 'correct' | 'wrong' | 'finished'
-        quizLocalScore: 0,
-        // Memory specifics
-        memoryCards: [],
-        flippedCards: [], // uniqueId
-        solvedCards: [], // uniqueId
-        isDisabled: false
+        quizLocalScore: 0, // نقاط الاختبار الحالي
+        // وضع الذاكرة (Memory)
+        memoryCards: [], // البطاقات المستخدمة في الذاكرة
+        flippedCards: [], // البطاقات المقلوبة حالياً (بحد أقصى 2)
+        solvedCards: [], // البطاقات التي تم مطابقتها بنجاح
+        isDisabled: false // لمنع النقر أثناء الانتظار
     };
 
-    // --- الوظائف المساعدة ---
-
+    // --- العناصر الرئيسية في DOM ---
     const contentArea = document.getElementById('content-area');
     const headerArea = document.getElementById('header-area');
 
+    // --- الوظائف المساعدة العامة ---
+
     function updateState(newState) {
-        // Log changes for debugging (optional)
-        // console.log("State updated:", newState);
+        // تحديث الحالة وإعادة رسم التطبيق
         state = { ...state, ...newState };
         renderApp();
     }
 
     function goHome() {
+        // العودة إلى الشاشة الرئيسية وإعادة تعيين الحالات الخاصة باللعب
         updateState({
             view: 'home',
             activeCat: null,
@@ -461,9 +534,10 @@
     }
 
     function goBackToCategorySelect() {
+         // العودة إلى شاشة اختيار الفئة
          updateState({
             view: 'category-select',
-            activeCat: null,
+            activeCat: state.activeCat, // نبقي على الفئة النشطة مؤقتاً إذا كانت موجودة
             selectedCategory: null,
             currentIndex: 0,
             isFlipped: false,
@@ -471,4 +545,510 @@
             quizFeedback: null,
             quizLocalScore: 0,
             memoryCards: [],
-            flippedCards
+            flippedCards: [],
+            solvedCards: [],
+            isDisabled: false
+        });
+    }
+
+    function speak(text, lang = 'tr-TR') {
+        // وظيفة تحويل النص إلى كلام (TTS)
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); 
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.9; 
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function shuffleArray(array) {
+        // خوارزمية لخلط عناصر المصفوفة (Fisher-Yates)
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function createIcon(iconName, className = 'w-6 h-6') {
+        // إنشاء أيقونات Lucide
+        return `<i data-lucide="${iconName}" class="${className}"></i>`;
+    }
+
+    // --- وظيفة الـ Header (لإعادة الرسم في كل تغيير حالة) ---
+    function renderHeader() {
+        headerArea.innerHTML = `
+            <div class="bg-yellow-400 p-4 flex justify-between items-center shadow-md z-10">
+                <button onclick="goHome()" class="bg-white p-2 rounded-full hover:bg-yellow-100 transition shadow-sm">
+                    ${createIcon('home', 'text-yellow-600 w-6 h-6')}
+                </button>
+                <h1 class="text-2xl md:text-3xl font-black text-white drop-shadow-md flex items-center gap-2">
+                    🇹🇷 مغامرة التركية <span class="hidden md:inline">للأطفال</span>
+                </h1>
+                <div class="bg-white px-4 py-1 rounded-full flex items-center gap-2 shadow-sm">
+                    ${createIcon('star', 'text-yellow-500 w-5 h-5 fill-current')}
+                    <span class="font-black text-yellow-600 text-lg">${state.score}</span>
+                </div>
+            </div>
+        `;
+        // إعادة رسم أيقونات Lucide بعد إضافتها للـ DOM
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }
+
+    // --- واجهات المستخدم المختلفة ---
+
+    function renderHome() {
+        // الشاشة الرئيسية
+        contentArea.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-full gap-8 animate-bounce-in">
+                <div class="text-center space-y-4">
+                    <div class="text-8xl animate-bounce mb-4">🎈</div>
+                    <h2 class="text-4xl font-black text-blue-600 mb-2">مرحباً يا بطل!</h2>
+                    <p class="text-xl text-gray-600">هل أنت مستعد لتعلم كلمات جديدة؟</p>
+                </div>
+
+                <button 
+                    onclick="updateState({ view: 'category-select' })"
+                    class="group relative bg-green-500 hover:bg-green-600 text-white text-3xl font-bold py-6 px-12 rounded-3xl shadow-[0_10px_0_rgb(21,128,61)] hover:shadow-[0_5px_0_rgb(21,128,61)] active:shadow-none active:translate-y-2 transition-all transform w-full max-w-sm flex items-center justify-center gap-4"
+                >
+                    ${createIcon('play', 'w-10 h-10 fill-current')}
+                    ابدأ اللعب
+                </button>
+            </div>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function renderCategorySelect() {
+        
+        if (!state.activeCat) {
+            // شاشة اختيار الفئة (View 1)
+            let buttonsHTML = categories.map(cat => `
+                <button
+                    onclick="updateState({ activeCat: categories.find(c => c.id === '${cat.id}') })"
+                    class="${cat.color} hover:brightness-110 text-white p-4 rounded-xl shadow-lg transform hover:scale-105 transition-all flex flex-col items-center justify-center gap-1 group"
+                >
+                    <span class="text-4xl group-hover:scale-110 transition-transform duration-300">${cat.icon}</span>
+                    <span class="text-lg font-bold">${cat.title}</span>
+                    <span class="text-sm opacity-80">${cat.titleTr}</span>
+                </button>
+            `).join('');
+
+            contentArea.innerHTML = `
+                <div class="h-full flex flex-col">
+                    <h2 class="text-3xl font-black text-center text-gray-700 mb-8">اختر موضوعاً (${categories.length} قسماً)</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 flex-1 overflow-y-auto p-2">
+                        ${buttonsHTML}
+                    </div>
+                </div>
+            `;
+        } else {
+            // شاشة اختيار وضع اللعب (View 2)
+            const cat = state.activeCat;
+
+            const modeCard = (title, icon, color, mode) => `
+                <button 
+                    onclick="updateState({ selectedCategory: state.activeCat, view: '${mode}', currentIndex: 0 })"
+                    class="${color} text-white p-4 rounded-2xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex flex-col items-center gap-2"
+                >
+                    ${createIcon(icon, 'w-8 h-8')}
+                    <span class="text-xl font-bold">${title}</span>
+                    <span class="text-sm opacity-90">${mode === 'learn' ? 'شاهد واحفظ الكلمات' : mode === 'quiz' ? 'اختبر معلوماتك' : 'لعبة البطاقات'}</span>
+                </button>
+            `;
+
+            contentArea.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full gap-6 animate-bounce-in">
+                    <button 
+                        onclick="updateState({ activeCat: null })" 
+                        class="absolute top-0 right-0 text-gray-500 hover:text-gray-800 flex items-center gap-2 font-bold transition-colors"
+                    >
+                        ${createIcon('arrow-right', 'w-5 h-5')} تغيير الموضوع
+                    </button>
+
+                    <div class="${cat.color} text-white p-6 rounded-3xl shadow-2xl mb-4 text-center w-full max-w-md">
+                        <span class="text-6xl block mb-2">${cat.icon}</span>
+                        <h2 class="text-3xl font-black">${cat.title}</h2>
+                    </div>
+
+                    <h3 class="text-xl text-gray-600 font-bold">ماذا تريد أن تفعل؟</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl">
+                        ${modeCard('تعلم', 'book-open', 'bg-blue-500', 'learn')}
+                        ${modeCard('اختبار', 'trophy', 'bg-purple-500', 'quiz')}
+                        ${modeCard('ذاكرة', 'grid', 'bg-pink-500', 'memory')}
+                    </div>
+                </div>
+            `;
+        }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // --- وضع التعلم (Learn Mode) ---
+
+    function handleLearnFlip() {
+        // قلب البطاقة وعرض الترجمة
+        updateState({ isFlipped: !state.isFlipped });
+        if (!state.isFlipped) {
+            // نطق الكلمة عند قلبها للجهة التركية
+            speak(state.selectedCategory.words[state.currentIndex].tr);
+        }
+    }
+
+    function handleLearnNavigation(direction) {
+        // التنقل بين الكلمات
+        const words = state.selectedCategory.words;
+        const newIndex = (state.currentIndex + direction + words.length) % words.length;
+        updateState({ currentIndex: newIndex, isFlipped: false });
+    }
+
+    function renderLearnMode() {
+        const category = state.selectedCategory;
+        const currentWord = category.words[state.currentIndex];
+        
+        // نطق الكلمة التركية عند الانتقال لكلمة جديدة
+        if (!state.isFlipped) {
+             speak(currentWord.tr);
+        }
+
+        const cardClasses = `relative w-full h-full transition-all duration-500 transform ${state.isFlipped ? 'rotate-y-180' : ''}`;
+
+        contentArea.innerHTML = `
+            <div class="flex flex-col items-center h-full justify-center">
+                <div class="relative w-full max-w-sm aspect-[3/4] perspective-1000">
+                    <div class="${cardClasses}" style="transform-style: preserve-3d;">
+                        
+                        <!-- الوجه الأمامي (التركية) -->
+                        <div 
+                            onclick="handleLearnFlip()"
+                            class="absolute w-full h-full bg-white rounded-3xl shadow-2xl border-b-8 border-gray-200 flex flex-col items-center justify-center p-8 cursor-pointer backface-hidden z-10"
+                        >
+                            <div class="text-9xl mb-8">${currentWord.emoji}</div>
+                            <h2 class="text-4xl font-black text-gray-800 mb-2">${currentWord.tr}</h2>
+                            <p class="text-gray-400 text-sm">اضغط للترجمة</p>
+                            <button 
+                                onclick="event.stopPropagation(); speak('${currentWord.tr}')"
+                                class="mt-6 bg-blue-100 p-4 rounded-full text-blue-600 hover:bg-blue-200 transition-colors"
+                            >
+                                ${createIcon('volume-2', 'w-8 h-8')}
+                            </button>
+                        </div>
+
+                        <!-- الوجه الخلفي (العربية) -->
+                        <div 
+                            onclick="handleLearnFlip()"
+                            class="absolute w-full h-full bg-blue-500 rounded-3xl shadow-2xl border-b-8 border-blue-700 flex flex-col items-center justify-center p-8 cursor-pointer text-white backface-hidden rotate-y-180"
+                        >
+                            <div class="text-6xl mb-4 opacity-50">${currentWord.emoji}</div>
+                            <h2 class="text-4xl font-black mb-4">${currentWord.ar}</h2>
+                            <h3 class="text-2xl font-bold opacity-80">${currentWord.tr}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mt-8 w-full max-w-sm justify-between">
+                    <button onclick="handleLearnNavigation(-1)" class="bg-gray-200 p-4 rounded-xl font-bold hover:bg-gray-300 transition">السابق</button>
+                    <span class="flex items-center font-bold text-gray-500">${state.currentIndex + 1} / ${category.words.length}</span>
+                    <button onclick="handleLearnNavigation(1)" class="bg-blue-500 text-white p-4 rounded-xl font-bold hover:bg-blue-600 transition">التالي</button>
+                </div>
+                 <button onclick="goBackToCategorySelect()" class="mt-4 text-sm text-gray-500 hover:text-gray-800 transition-colors flex items-center gap-1">
+                    ${createIcon('arrow-right', 'w-4 h-4')} العودة لاختيار القسم
+                </button>
+            </div>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // --- وضع الاختبار (Quiz Mode) ---
+
+    function setupQuiz() {
+        // إعداد سؤال جديد وخلط الخيارات
+        const category = state.selectedCategory;
+        const currentWord = category.words[state.currentIndex];
+
+        if (!currentWord) return updateState({ quizFeedback: 'finished' });
+
+        // نختار 3 خيارات خاطئة عشوائية
+        const others = category.words.filter(w => w.id !== currentWord.id);
+        const shuffledOthers = shuffleArray([...others]).slice(0, 3);
+        const allOptions = shuffleArray([currentWord, ...shuffledOthers]);
+        
+        updateState({ quizOptions: allOptions, quizFeedback: null });
+        speak(currentWord.tr); // نطق الكلمة التركية للسؤال
+    }
+
+    function handleQuizAnswer(selectedId) {
+        // معالجة إجابة المستخدم
+        if (state.quizFeedback) return;
+
+        const currentWord = state.selectedCategory.words[state.currentIndex];
+
+        if (selectedId === currentWord.id) {
+            // إجابة صحيحة
+            updateState({ quizFeedback: 'correct', score: state.score + 10, quizLocalScore: state.quizLocalScore + 1 });
+            speak('Harika'); // نطق عبارة تشجيعية بالتركية
+            setTimeout(() => {
+                if (state.currentIndex < state.selectedCategory.words.length - 1) {
+                    // الانتقال للسؤال التالي
+                    updateState({ currentIndex: state.currentIndex + 1 });
+                    setupQuiz(); 
+                } else {
+                    // نهاية الاختبار
+                    updateState({ quizFeedback: 'finished' });
+                }
+            }, 1500);
+        } else {
+            // إجابة خاطئة
+            updateState({ quizFeedback: 'wrong' });
+            speak('Tekrar dene');
+            setTimeout(() => {
+                // إزالة رسالة الخطأ بعد فترة قصيرة
+                updateState({ quizFeedback: null });
+            }, 1000);
+        }
+    }
+
+    function renderQuizMode() {
+        const category = state.selectedCategory;
+        
+        if (state.quizFeedback === 'finished') {
+            // شاشة نتائج الاختبار
+            contentArea.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full text-center animate-bounce-in">
+                    <div class="text-9xl mb-4">🏆</div>
+                    <h2 class="text-4xl font-black text-yellow-500 mb-4">أحسنت يا بطل!</h2>
+                    <p class="text-xl text-gray-600 mb-2">لقد أنهيت اختبار ${category.title} بنجاح.</p>
+                    <p class="text-2xl font-bold text-blue-600 mb-8">أحرزت ${state.quizLocalScore} من ${category.words.length} نقاط</p>
+                    <button onclick="goBackToCategorySelect()" class="bg-green-500 text-white py-3 px-8 rounded-2xl text-xl font-bold shadow-lg hover:scale-105 transition">اختر قسماً آخر</button>
+                </div>
+            `;
+            return;
+        }
+        
+        const currentWord = category.words[state.currentIndex];
+        
+        if (!currentWord || state.quizOptions.length === 0) {
+            // تحميل السؤال الأول
+            contentArea.innerHTML = `<div class="text-center pt-20 text-xl text-gray-500">جاري تحميل السؤال...</div>`;
+            return setupQuiz(); 
+        }
+
+        const progressPercent = ((state.currentIndex) / category.words.length) * 100;
+
+        const optionsHTML = state.quizOptions.map(opt => `
+            <button
+                onclick="handleQuizAnswer(${opt.id})"
+                ${state.quizFeedback ? 'disabled' : ''}
+                class="
+                    p-6 rounded-3xl shadow-md text-6xl transition-all transform hover:scale-105 border-4
+                    ${state.quizFeedback === 'correct' && opt.id === currentWord.id ? 'bg-green-100 border-green-500 scale-105' : ''}
+                    ${state.quizFeedback === 'wrong' && opt.id === currentWord.id ? 'bg-green-100 border-green-500' : ''} 
+                    ${state.quizFeedback === 'wrong' && opt.id !== currentWord.id ? 'opacity-50' : ''}
+                    ${!state.quizFeedback ? 'bg-white border-transparent hover:border-blue-300' : ''}
+                "
+            >
+                ${opt.emoji}
+            </button>
+        `).join('');
+
+        let feedbackHTML = '';
+        if (state.quizFeedback === 'correct') {
+            feedbackHTML = `<div class="mt-6 text-2xl font-black text-green-500 animate-bounce-in">إجابة صحيحة! 🎉</div>`;
+        } else if (state.quizFeedback === 'wrong') {
+            feedbackHTML = `<div class="mt-6 text-2xl font-black text-red-500 animate-shake">حاول مرة أخرى 😅</div>`;
+        }
+
+
+        contentArea.innerHTML = `
+            <div class="flex flex-col items-center h-full max-w-2xl mx-auto pt-4">
+                <!-- شريط التقدم -->
+                <div class="w-full bg-gray-200 rounded-full h-4 mb-8">
+                    <div 
+                        class="bg-blue-500 h-4 rounded-full transition-all duration-500" 
+                        style="width: ${progressPercent}%"
+                    ></div>
+                </div>
+
+                <!-- السؤال -->
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl text-gray-500 mb-2">أين هو؟</h2>
+                    <h1 class="text-5xl font-black text-blue-600 mb-4 cursor-pointer hover:scale-105 transition" onclick="speak('${currentWord.tr}')">
+                        ${currentWord.tr}
+                        ${createIcon('volume-2', 'inline mr-3 w-8 h-8 text-blue-400')}
+                    </h1>
+                </div>
+
+                <!-- شبكة الخيارات -->
+                <div class="grid grid-cols-2 gap-4 w-full">
+                    ${optionsHTML}
+                </div>
+                
+                <!-- التغذية الراجعة (Feedback) -->
+                ${feedbackHTML}
+
+                 <button onclick="goBackToCategorySelect()" class="mt-6 text-sm text-gray-500 hover:text-gray-800 transition-colors flex items-center gap-1">
+                    ${createIcon('arrow-right', 'w-4 h-4')} العودة لاختيار القسم
+                </button>
+            </div>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+
+    // --- وضع الذاكرة (Memory Mode) ---
+
+    function setupMemory() {
+        // إعداد بطاقات الذاكرة (8 كلمات = 16 بطاقة)
+        const category = state.selectedCategory;
+        const wordsToUse = category.words.slice(0, 8); 
+
+        const initialCards = [];
+        wordsToUse.forEach(w => {
+            // بطاقة للكلمة التركية
+            initialCards.push({ id: w.id, content: w.tr, type: 'text', uniqueId: `${w.id}-text` });
+            // بطاقة للرمز التعبيري
+            initialCards.push({ id: w.id, content: w.emoji, type: 'emoji', uniqueId: `${w.id}-emoji` });
+        });
+        
+        updateState({
+            memoryCards: shuffleArray(initialCards),
+            flippedCards: [],
+            solvedCards: [],
+            isDisabled: false
+        });
+    }
+
+    function handleMemoryClick(uniqueId) {
+        // معالجة النقر على بطاقة في وضع الذاكرة
+        if (state.isDisabled || state.solvedCards.includes(uniqueId) || state.flippedCards.includes(uniqueId)) return;
+
+        const clickedCard = state.memoryCards.find(c => c.uniqueId === uniqueId);
+
+        if (state.flippedCards.length === 0) {
+            // قلب البطاقة الأولى
+            if (clickedCard.type === 'text') speak(clickedCard.content);
+            updateState({ flippedCards: [uniqueId] });
+            return;
+        }
+
+        // قلب البطاقة الثانية
+        const newFlipped = [state.flippedCards[0], uniqueId];
+        updateState({ flippedCards: newFlipped, isDisabled: true });
+        if (clickedCard.type === 'text') speak(clickedCard.content);
+
+
+        const firstCard = state.memoryCards.find(c => c.uniqueId === newFlipped[0]);
+        const secondCard = clickedCard; 
+
+        if (firstCard.id === secondCard.id) {
+            // تطابق ناجح
+            updateState({ 
+                solvedCards: [...state.solvedCards, firstCard.uniqueId, secondCard.uniqueId],
+                flippedCards: [],
+                isDisabled: false,
+                score: state.score + 20
+            });
+            speak('Süper');
+        } else {
+            // عدم تطابق
+            setTimeout(() => {
+                // إغلاق البطاقتين بعد ثانية
+                updateState({ flippedCards: [], isDisabled: false });
+            }, 1000);
+        }
+    }
+
+    function renderMemoryMode() {
+        if (state.memoryCards.length === 0) {
+            setupMemory(); // إعداد اللعبة لأول مرة
+            return; 
+        }
+
+        const isCompleted = state.memoryCards.length > 0 && state.solvedCards.length === state.memoryCards.length;
+
+        if (isCompleted) {
+            // شاشة اكتمال اللعبة
+            contentArea.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full text-center animate-bounce-in">
+                    <div class="text-9xl mb-4">🌟</div>
+                    <h2 class="text-4xl font-black text-purple-600 mb-4">ذاكرة فولاذية!</h2>
+                    <button onclick="goBackToCategorySelect()" class="bg-purple-500 text-white py-3 px-8 rounded-2xl text-xl font-bold shadow-lg hover:bg-purple-600 transition">العودة للقائمة</button>
+                </div>
+            `;
+            return;
+        }
+
+        const cardsHTML = state.memoryCards.map(card => {
+            const isFlippedNow = state.flippedCards.includes(card.uniqueId) || state.solvedCards.includes(card.uniqueId);
+            
+            return `
+                <div
+                    onclick="handleMemoryClick('${card.uniqueId}')"
+                    class="
+                        aspect-square rounded-xl flex items-center justify-center text-xl font-black cursor-pointer transition-all duration-300 transform shadow-md
+                        ${isFlippedNow 
+                            ? `${card.type === 'text' ? 'bg-blue-500 text-white' : 'bg-white'} rotate-0` 
+                            : 'bg-gray-300 text-transparent hover:bg-gray-400'}
+                        ${state.solvedCards.includes(card.uniqueId) ? 'shadow-green-500/50 shadow-xl scale-105' : ''}
+                    "
+                    style="pointer-events: ${state.solvedCards.includes(card.uniqueId) || state.isDisabled ? 'none' : 'auto'};"
+                >
+                    <div class="${card.type === 'emoji' ? 'text-5xl' : 'text-xl'}">
+                        ${isFlippedNow ? card.content : createIcon('aperture', 'w-10 h-10 text-white')}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        contentArea.innerHTML = `
+            <div class="h-full flex flex-col items-center">
+                <h2 class="text-2xl font-black text-gray-600 mb-4">طابق الكلمة التركية مع الرمز (4x4)</h2>
+                <div class="grid grid-cols-4 gap-3 w-full max-w-lg mx-auto">
+                    ${cardsHTML}
+                </div>
+                <button onclick="goBackToCategorySelect()" class="mt-6 text-sm text-gray-500 hover:text-gray-800 transition-colors flex items-center gap-1">
+                    ${createIcon('arrow-right', 'w-4 h-4')} العودة لاختيار القسم
+                </button>
+            </div>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+
+    // --- وظيفة العرض الرئيسية (Main Render Function) ---
+    function renderApp() {
+        renderHeader();
+        contentArea.innerHTML = ''; 
+
+        switch (state.view) {
+            case 'home':
+                renderHome();
+                break;
+            case 'category-select':
+                renderCategorySelect();
+                break;
+            case 'learn':
+                if (state.selectedCategory) renderLearnMode();
+                else updateState({ view: 'category-select' });
+                break;
+            case 'quiz':
+                if (state.selectedCategory) renderQuizMode();
+                else updateState({ view: 'category-select' });
+                break;
+            case 'memory':
+                if (state.selectedCategory) renderMemoryMode();
+                else updateState({ view: 'category-select' });
+                break;
+        }
+    }
+
+    // تهيئة التطبيق عند تحميل الصفحة
+    window.onload = renderApp;
+</script>
+
+</body>
+</html>
+
