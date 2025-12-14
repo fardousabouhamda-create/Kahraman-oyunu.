@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇹🇷 مغامرة التركية للأطفال - ParadiseTurk</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons as SVG for simplicity -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Custom CSS for Card Flip Effect */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        /* Custom Colors for Categories */
+        .bg-brown-400 { background-color: #a16207; }
+        .bg-brown-400:hover { background-color: #b45309; }
+        .bg-fuchsia-500 { background-color: #d946ef; }
+        .bg-fuchsia-500:hover { background-color: #c026d3; }
+        .bg-lime-500 { background-color: #84cc16; }
+        .bg-lime-500:hover { background-color: #65a30d; }
+        /* Animation Utility */
+        @keyframes bounce-in {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        .animate-bounce-in {
+            animation: bounce-in 0.5s ease-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .animate-shake {
+            animation: shake 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" class="min-h-screen bg-gradient-to-br from-cyan-100 to-blue-200 font-sans p-4 select-none">
+    <div class="max-w-6xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden min-h-[700px] flex flex-col relative border-4 border-white">
+        
+        <!-- Header will be inserted here by JS -->
+        <div id="header-area"></div>
+
+        <!-- Content Area -->
+        <div id="content-area" class="flex-1 p-6 relative">
+            <!-- Dynamic content inserted here by JS -->
+        </div>
+
+        <!-- Branding -->
+        <div class="p-2 text-center text-xs text-gray-500 bg-white/70">
+            Powered by ParadiseTurk
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- البيانات ---
+    const categories = [
+        {
+            id: 'animals',
+            title: 'الحيوانات',
+            titleTr: 'Hayvanlar',
+            color: 'bg-orange-400',
+            icon: '🦁',
+            words: [
+                { id: 1, tr: 'Kedi', ar: 'قطة', emoji: '🐱' },
+                { id: 2, tr: 'Köpek', ar: 'كلب', emoji: '🐶' },
+                { id: 3, tr: 'Kuş', ar: 'عصفور', emoji: '🐦' },
+                { id: 4, tr: 'Aslan', ar: 'أسد', emoji: '🦁' },
+                { id: 5, tr: 'Balık', ar: 'سمكة', emoji: '🐟' },
+                { id: 6, tr: 'Fil', ar: 'فيل', emoji: '🐘' },
+                { id: 7, tr: 'At', ar: 'حصان', emoji: '🐎' },
+                { id: 8, tr: 'Tavşan', ar: 'أرنب', emoji: '🐰' },
+                { id: 9, tr: 'Ördek', ar: 'بطة', emoji: '🦆' },
+                { id: 10, tr: 'İnek', ar: 'بقرة', emoji: '🐄' },
+            ]
+        },
+        {
+            id: 'fruits',
+            title: 'الفواكه',
+            titleTr: 'Meyveler',
+            color: 'bg-red-400',
+            icon: '🍎',
+            words: [
+                { id: 11, tr: 'Elma', ar: 'تفاحة', emoji: '🍎' },
+                { id: 12, tr: 'Muz', ar: 'موز', emoji: '🍌' },
+                { id: 13, tr: 'Çilek', ar: 'فراولة', emoji: '🍓' },
+                { id: 14, tr: 'Portakal', ar: 'برتقال', emoji: '🍊' },
+                { id: 15, tr: 'Üzüm', ar: 'عنب', emoji: '🍇' },
+                { id: 16, tr: 'Karpuz', ar: 'بطيخ', emoji: '🍉' },
+                { id: 17, tr: 'Kiraz', ar: 'كرز', emoji: '🍒' },
+                { id: 18, tr: 'Şeftali', ar: 'خوخ', emoji: '🍑' },
+                { id: 19, tr: 'Limon', ar: 'ليمون', emoji: '🍋' },
+                { id: 20, tr: 'Armut', ar: 'كمثرى', emoji: '🍐' },
+            ]
+        },
+        {
+            id: 'numbers',
+            title: 'الأرقام',
+            titleTr: 'Sayılar',
+            color: 'bg-blue-400',
+            icon: '🔢',
+            words: [
+                { id: 21, tr: 'Bir', ar: 'واحد', emoji: '1️⃣' },
+                { id: 22, tr: 'İki', ar: 'اثنان', emoji: '2️⃣' },
+                { id: 23, tr: 'Üç', ar: 'ثلاثة', emoji: '3️⃣' },
+                { id: 24, tr: 'Dört', ar: 'أربعة', emoji: '4️⃣' },
+                { id: 25, tr: 'Beş', ar: 'خمسة', emoji: '5️⃣' },
+                { id: 26, tr: 'Altı', ar: 'ستة', emoji: '6️⃣' },
+                { id: 27, tr: 'Yedi', ar: 'سبعة', emoji: '7️⃣' },
+                { id: 28, tr: 'Sekiz', ar: 'ثمانية', emoji: '8️⃣' },
+                { id: 29, tr: 'Dokuz', ar: 'تسعة', emoji: '9️⃣' },
+                { id: 30, tr: 'On', ar: 'عشرة', emoji: '🔟' },
+            ]
+        },
+        {
+            id: 'colors',
+            title: 'الألوان',
+            titleTr: 'Renkler',
+            color: 'bg-purple-400',
+            icon: '🎨',
+            words: [
+                { id: 31, tr: 'Kırmızı', ar: 'أحمر', emoji: '🔴' },
+                { id: 32, tr: 'Mavi', ar: 'أزرق', emoji: '🔵' },
+                { id: 33, tr: 'Sarı', ar: 'أصفر', emoji: '🟡' },
+                { id: 34, tr: 'Yeşil', ar: 'أخضر', emoji: '🟢' },
+                { id: 35, tr: 'Siyah', ar: 'أسود', emoji: '⚫' },
+                { id: 36, tr: 'Beyaz', ar: 'أبيض', emoji: '⚪' },
+                { id: 37, tr: 'Pembe', ar: 'وردي', emoji: '🌸' },
+                { id: 38, tr: 'Mor', ar: 'بنفسجي', emoji: '🟣' },
+                { id: 39, tr: 'Turuncu', ar: 'برتقالي', emoji: '🟠' },
+                { id: 40, tr: 'Kahverengi', ar: 'بني', emoji: '🟤' },
+            ]
+        },
+        {
+            id: 'family',
+            title: 'العائلة',
+            titleTr: 'Aile',
+            color: 'bg-pink-400',
+            icon: '👨‍👩‍👧‍👦',
+            words: [
+                { id: 41, tr: 'Aile', ar: 'عائلة', emoji: '👨‍👩‍👧‍👦' },
+                { id: 42, tr: 'Anne', ar: 'أُم', emoji: '👩' },
+                { id: 43, tr: 'Baba', ar: 'أَب', emoji: '🧔' },
+                { id: 44, tr: 'Kardeş', ar: 'أخ/أخت', emoji: '👧' },
+                { id: 45, tr: 'Ağabey', ar: 'أخ أكبر', emoji: '👦' },
+                { id: 46, tr: 'Abla', ar: 'أخت أكبر', emoji: '👩‍🦰' },
+                { id: 47, tr: 'Dede', ar: 'جد', emoji: '👴' },
+                { id: 48, tr: 'Nine', ar: 'جدة', emoji: '👵' },
+                { id: 49, tr: 'Çocuk', ar: 'طفل', emoji: '👶' },
+                { id: 50, tr: 'Hala', ar: 'عمّة', emoji: '👩‍🦳' },
+            ]
+        },
+        {
+            id: 'food',
+            title: 'الطعام',
+            titleTr: 'Yemek',
+            color: 'bg-green-500',
+            icon: '🍕',
+            words: [
+                { id: 51, tr: 'Ekmek', ar: 'خبز', emoji: '🍞' },
+                { id: 52, tr: 'Su', ar: 'ماء', emoji: '💧' },
+                { id: 53, tr: 'Süt', ar: 'حليب', emoji: '🥛' },
+                { id: 54, tr: 'Peynir', ar: 'جبن', emoji: '🧀' },
+                { id: 55, tr: 'Yumurta', ar: 'بيضة', emoji: '🥚' },
+                { id: 56, tr: 'Tuz', ar: 'ملح', emoji: '🧂' },
+                { id: 57, tr: 'Şeker', ar: 'سكر', emoji: '🍚' },
+                { id: 58, tr: 'Tavuk', ar: 'دجاج', emoji: '🍗' },
+                { id: 59, tr: 'Pilav', ar: 'أرز/بيلاف', emoji: '🍚' },
+                { id: 60, tr: 'Çorba', ar: 'حساء', emoji: '🥣' },
+            ]
+        },
+        {
+            id: 'transport',
+            title: 'المواصلات',
+            titleTr: 'Ulaşım',
+            color: 'bg-teal-500',
+            icon: '🚌',
+            words: [
+                { id: 61, tr: 'Araba', ar: 'سيارة', emoji: '🚗' },
+                { id: 62, tr: 'Otobüs', ar: 'حافلة', emoji: '🚌' },
+                { id: 63, tr: 'Tren', ar: 'قطار', emoji: '🚂' },
+                { id: 64, tr: 'Uçak', ar: 'طائرة', emoji: '✈️' },
+                { id: 65, tr: 'Gemi', ar: 'سفينة', emoji: '🚢' },
+                { id: 66, tr: 'Bisiklet', ar: 'دراجة', emoji: '🚲' },
+                { id: 67, tr: 'Motorsiklet', ar: 'دراجة نارية', emoji: '🏍️' },
+                { id: 68, tr: 'Taksi', ar: 'تاكسي', emoji: '🚕' },
+                { id: 69, tr: 'Ambulans', ar: 'إسعاف', emoji: '🚑' },
+                { id: 70, tr: 'Yol', ar: 'طريق', emoji: '🛣️' },
+            ]
+        },
+        {
+            id: 'bodyparts',
+            title: 'أجزاء الجسم',
+            titleTr: 'Vücut Parçaları',
+            color: 'bg-red-300',
+            icon: '✋',
+            words: [
+                { id: 71, tr: 'Kafa', ar: 'رأس', emoji: '🧑' },
+                { id: 72, tr: 'Göz', ar: 'عين', emoji: '👀' },
+                { id: 73, tr: 'Kulak', ar: 'أذن', emoji: '👂' },
+                { id: 74, tr: 'Burun', ar: 'أنف', emoji: '👃' },
+                { id: 75, tr: 'Ağız', ar: 'فم', emoji: '👄' },
+                { id: 76, tr: 'El', ar: 'يد', emoji: '✋' },
+                { id: 77, tr: 'Ayak', ar: 'قدم', emoji: '🦶' },
+                { id: 78, tr: 'Diş', ar: 'سِن', emoji: '🦷' },
+                { id: 79, tr: 'Saç', ar: 'شعر', emoji: '💇‍♀️' },
+                { id: 80, tr: 'Boyun', ar: 'رقبة', emoji: '🦒' },
+            ]
+        },
+        {
+            id: 'clothes',
+            title: 'الملابس',
+            titleTr: 'Kıyafetler',
+            color: 'bg-indigo-400',
+            icon: '👕',
+            words: [
+                { id: 81, tr: 'Elbise', ar: 'فستان', emoji: '👗' },
+                { id: 82, tr: 'Gömlek', ar: 'قميص', emoji: '👔' },
+                { id: 83, tr: 'Pantolon', ar: 'بنطال', emoji: '👖' },
+                { id: 84, tr: 'Ayakkabı', ar: 'حذاء', emoji: '👟' },
+                { id: 85, tr: 'Çorap', ar: 'جورب', emoji: '🧦' },
+                { id: 86, tr: 'Şapka', ar: 'قبعة', emoji: '🧢' },
+                { id: 87, tr: 'Ceket', ar: 'سترة', emoji: '🧥' },
+                { id: 88, tr: 'T-shirt', ar: 'تي شيرت', emoji: '👕' },
+                { id: 89, tr: 'Etek', ar: 'تنورة', emoji: '👚' },
+                { id: 90, tr: 'Pijama', ar: 'بيجاما', emoji: '🛌' },
+            ]
+        },
+        {
+            id: 'shapes',
+            title: 'الأشكال',
+            titleTr: 'Şekiller',
+            color: 'bg-yellow-500',
+            icon: '📐',
+            words: [
+                { id: 91, tr: 'Şekil', ar: 'شكل', emoji: '🔷' },
+                { id: 92, tr: 'Kare', ar: 'مربع', emoji: '🟥' },
+                { id: 93, tr: 'Üçgen', ar: 'مثلث', emoji: '🔺' },
+                { id: 94, tr: 'Daire', ar: 'دائرة', emoji: '🔵' },
+                { id: 95, tr: 'Yıldız', ar: 'نجمة', emoji: '⭐' },
+                { id: 96, tr: 'Kalp', ar: 'قلب', emoji: '❤️' },
+                { id: 97, tr: 'Dikdörtgen', ar: 'مستطيل', emoji: '🟨' },
+                { id: 98, tr: 'Beşgen', ar: 'مخمس', emoji: '🇵' }, 
+                { id: 99, tr: 'Altıgen', ar: 'مسدس', emoji: '🇭' }, 
+                { id: 100, tr: 'Çizgi', ar: 'خط', emoji: '➖' },
+            ]
+        },
+        {
+            id: 'nature',
+            title: 'الطبيعة',
+            titleTr: 'Doğa',
+            color: 'bg-lime-500',
+            icon: '🌳',
+            words: [
+                { id: 101, tr: 'Güneş', ar: 'شمس', emoji: '☀️' },
+                { id: 102, tr: 'Ay', ar: 'قمر', emoji: '🌙' },
+                { id: 103, tr: 'Yıldız', ar: 'نجم', emoji: '✨' },
+                { id: 104, tr: 'Ağaç', ar: 'شجرة', emoji: '🌳' },
+                { id: 105, tr: 'Çiçek', ar: 'زهرة', emoji: '🌸' },
+                { id: 106, tr: 'Dağ', ar: 'جبل', emoji: '⛰️' },
+                { id: 107, tr: 'Deniz', ar: 'بحر', emoji: '🌊' },
+                { id: 108, tr: 'Kum', ar: 'رمل', emoji: '🏖️' },
+                { id: 109, tr: 'Toprak', ar: 'تربة/أرض', emoji: '🪴' },
+                { id: 110, tr: 'Orman', ar: 'غابة', emoji: '🌲' },
+            ]
+        },
+        {
+            id: 'school',
+            title: 'المدرسة',
+            titleTr: 'Okul',
+            color: 'bg-sky-400',
+            icon: '🏫',
+            words: [
+                { id: 111, tr: 'Okul', ar: 'مدرسة', emoji: '🏫' },
+                { id: 112, tr: 'Öğrenci', ar: 'طالب', emoji: '🧑‍🎓' },
+                { id: 113, tr: 'Öğretmen', ar: 'معلم', emoji: '👩‍🏫' },
+                { id: 114, tr: 'Kitap', ar: 'كتاب', emoji: '📚' },
+                { id: 115, tr: 'Kalem', ar: 'قلم', emoji: '✏️' },
+                { id: 116, tr: 'Silgi', ar: 'ممّحاة', emoji: '🧼' },
+                { id: 117, tr: 'Defter', ar: 'دفتر', emoji: '📓' },
+                { id: 118, tr: 'Sınıf', ar: 'صف', emoji: '🚪' },
+                { id: 119, tr: 'Masa', ar: 'طاولة', emoji: '🖥️' },
+                { id: 120, tr: 'Sıra', ar: 'مقعد دراسي', emoji: '🪑' },
+            ]
+        },
+        {
+            id: 'house',
+            title: 'المنزل',
+            titleTr: 'Ev',
+            color: 'bg-brown-400', 
+            icon: '🏠',
+            words: [
+                { id: 121, tr: 'Ev', ar: 'منزل', emoji: '🏠' },
+                { id: 122, tr: 'Oda', ar: 'غرفة', emoji: '🚪' },
+                { id: 123, tr: 'Yatak', ar: 'سرير', emoji: '🛏️' },
+                { id: 124, tr: 'Mutfak', ar: 'مطبخ', emoji: '🍳' },
+                { id: 125, tr: 'Banyo', ar: 'حمام', emoji: '🛁' },
+                { id: 126, tr: 'Kapı', ar: 'باب', emoji: '🚪' },
+                { id: 127, tr: 'Pencere', ar: 'نافذة', emoji: '🪟' },
+                { id: 128, tr: 'Lamba', ar: 'مصباح', emoji: '💡' },
+                { id: 129, tr: 'Koltuk', ar: 'أريكة', emoji: '🛋️' },
+                { id: 130, tr: 'Halı', ar: 'سجادة', emoji: '🧶' },
+            ]
+        },
+        {
+            id: 'actions',
+            title: 'الأفعال',
+            titleTr: 'Eylemler',
+            color: 'bg-fuchsia-500',
+            icon: '🏃',
+            words: [
+                { id: 131, tr: 'Gitmek', ar: 'يذهب', emoji: '🚶' },
+                { id: 132, tr: 'Gelmek', ar: 'يأتي', emoji: '🏃' },
+                { id: 133, tr: 'Yemek', ar: 'يأكل', emoji: '🍽️' },
+                { id: 134, tr: 'İçmek', ar: 'يشرب', emoji: '🥤' },
+                { id: 135, tr: 'Oynamak', ar: 'يلعب', emoji: '⚽' },
+                { id: 136, tr: 'Okumak', ar: 'يقرأ', emoji: '📖' },
+                { id: 137, tr: 'Yazmak', ar: 'يكتب', emoji: '✍️' },
+                { id: 138, tr: 'Gülmek', ar: 'يضحك', emoji: '😂' },
+                { id: 139, tr: 'Ağlamak', ar: 'يبكي', emoji: '😭' },
+                { id: 140, tr: 'Uyumak', ar: 'ينام', emoji: '😴' },
+            ]
+        },
+        {
+            id: 'weather',
+            title: 'الطقس',
+            titleTr: 'Hava Durumu',
+            color: 'bg-indigo-300',
+            icon: '☀️',
+            words: [
+                { id: 141, tr: 'Hava', ar: 'طقس', emoji: '🌤️' },
+                { id: 142, tr: 'Güneşli', ar: 'مشمس', emoji: '☀️' },
+                { id: 143, tr: 'Yağmurlu', ar: 'ماطر', emoji: '🌧️' },
+                { id: 144, tr: 'Karlı', ar: 'مثلج', emoji: '❄️' },
+                { id: 145, tr: 'Rüzgarlı', ar: 'عاصف', emoji: '🌬️' },
+                { id: 146, tr: 'Sıcak', ar: 'حار', emoji: '🔥' },
+                { id: 147, tr: 'Soğuk', ar: 'بارد', emoji: '🥶' },
+                { id: 148, tr: 'Bulutlu', ar: 'غائم', emoji: '☁️' },
+                { id: 149, tr: 'Şimşek', ar: 'برق', emoji: '⚡' },
+                { id: 150, tr: 'Gökkuşağı', ar: 'قوس قزح', emoji: '🌈' },
+            ]
+        },
+        {
+            id: 'jobs',
+            title: 'الوظائف',
+            titleTr: 'Meslekler',
+            color: 'bg-amber-600',
+            icon: '👷',
+            words: [
+                { id: 151, tr: 'Doktor', ar: 'طبيب', emoji: '👩‍⚕️' },
+                { id: 152, tr: 'Polis', ar: 'شرطي', emoji: '👮' },
+                { id: 153, tr: 'Aşçı', ar: 'طاهي', emoji: '👨‍🍳' },
+                { id: 154, tr: 'Pilot', ar: 'طيار', emoji: '👨‍✈️' },
+                { id: 155, tr: 'İtfaiyeci', ar: 'رجل إطفاء', emoji: '🧑‍🚒' },
+                { id: 156, tr: 'Mühendis', ar: 'مهندس', emoji: '👷' },
+                { id: 157, tr: 'Sanatçı', ar: 'فنان', emoji: '🎨' },
+                { id: 158, tr: 'Şarkıcı', ar: 'مغني', emoji: '🎤' },
+                { id: 159, tr: 'Çiftçi', ar: 'مزارع', emoji: '🧑‍🌾' },
+                { id: 160, tr: 'Garson', ar: 'نادل', emoji: '🧑‍💼' },
+            ]
+        },
+        {
+            id: 'places',
+            title: 'الأماكن',
+            titleTr: 'Yerler',
+            color: 'bg-rose-400',
+            icon: '🗺️',
+            words: [
+                { id: 161, tr: 'Şehir', ar: 'مدينة', emoji: '🏙️' },
+                { id: 162, tr: 'Köy', ar: 'قرية', emoji: '🏡' },
+                { id: 163, tr: 'Park', ar: 'حديقة', emoji: '🏞️' },
+                { id: 164, tr: 'Market', ar: 'سوق', emoji: '🛒' },
+                { id: 165, tr: 'Hastane', ar: 'مستشفى', emoji: '🏥' },
+                { id: 166, tr: 'Bank', ar: 'مصرف', emoji: '🏦' },
+                { id: 167, tr: 'Postane', ar: 'مكتب بريد', emoji: '📮' },
+                { id: 168, tr: 'Havaalanı', ar: 'مطار', emoji: '🛫' },
+                { id: 169, tr: 'Plaj', ar: 'شاطئ', emoji: '⛱️' },
+                { id: 170, tr: 'Müze', ar: 'متحف', emoji: '🏛️' },
+            ]
+        },
+        {
+            id: 'adjectives',
+            title: 'الصفات',
+            titleTr: 'Sıfatlar',
+            color: 'bg-cyan-500',
+            icon: '😀',
+            words: [
+                { id: 171, tr: 'Büyük', ar: 'كبير', emoji: '🐘' },
+                { id: 172, tr: 'Küçük', ar: 'صغير', emoji: '🐭' },
+                { id: 173, tr: 'Mutlu', ar: 'سعيد', emoji: '😀' },
+                { id: 174, tr: 'Üzgün', ar: 'حزين', emoji: '😞' },
+                { id: 175, tr: 'Hızlı', ar: 'سريع', emoji: '💨' },
+                { id: 176, tr: 'Yavaş', ar: 'بطيء', emoji: '🐌' },
+                { id: 177, tr: 'Güzel', ar: 'جميل', emoji: '🌹' },
+                { id: 178, tr: 'Çirkin', ar: 'قبيح', emoji: '👹' },
+                { id: 179, tr: 'Uzun', ar: 'طويل', emoji: '⬆️' },
+                { id: 180, tr: 'Kısa', ar: 'قصير', emoji: '⬇️' },
+            ]
+        }
+    ];
+
+    // --- حالة التطبيق (State) ---
+    let state = {
+        view: 'home', // home, category-select, learn, quiz, memory
+        activeCat: null, // Used in category-select to choose mode
+        selectedCategory: null,
+        score: 0,
+        // Learn/Quiz specifics
+        currentIndex: 0,
+        isFlipped: false,
+        quizOptions: [],
+        quizFeedback: null, // 'correct' | 'wrong' | 'finished'
+        quizLocalScore: 0,
+        // Memory specifics
+        memoryCards: [],
+        flippedCards: [], // uniqueId
+        solvedCards: [], // uniqueId
+        isDisabled: false
+    };
+
+    // --- الوظائف المساعدة ---
+
+    const contentArea = document.getElementById('content-area');
+    const headerArea = document.getElementById('header-area');
+
+    function updateState(newState) {
+        // Log changes for debugging (optional)
+        // console.log("State updated:", newState);
+        state = { ...state, ...newState };
+        renderApp();
+    }
+
+    function goHome() {
+        updateState({
+            view: 'home',
+            activeCat: null,
+            selectedCategory: null,
+            currentIndex: 0,
+            isFlipped: false,
+            quizOptions: [],
+            quizFeedback: null,
+            quizLocalScore: 0,
+            memoryCards: [],
+            flippedCards: [],
+            solvedCards: [],
+            isDisabled: false
+        });
+    }
+
+    function goBackToCategorySelect() {
+         updateState({
+            view: 'category-select',
+            activeCat: null,
+            selectedCategory: null,
+            currentIndex: 0,
+            isFlipped: false,
+            quizOptions: [],
+            quizFeedback: null,
+            quizLocalScore: 0,
+            memoryCards: [],
+            flippedCards
